@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LaunchDarkly Session Replay Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        .status {
+            padding: 10px;
+            margin: 15px 0;
+            border-radius: 4px;
+            background-color: #e3f2fd;
+            border-left: 4px solid #2196F3;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        input, button {
+            padding: 10px;
+            margin: 5px;
+            font-size: 14px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .highlight-mask {
+            background-color: #ffeb3b;
+        }
+        .highlight-ignore {
+            border: 2px solid #ff9800;
+        }
+        #sessionInfo {
+            background-color: #f0f0f0;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 12px;
+        }
+        canvas {
+            border: 1px solid #ccc;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>LaunchDarkly Session Replay Test</h1>
+        
+        <div id="sdkStatus" class="status">
+            Initializing SDK...
+        </div>
+
+        <div class="test-section">
+            <h3>Test Interactions</h3>
+            <p>Perform various actions to test session recording:</p>
+            
+            <div>
+                <input type="text" id="normalInput" placeholder="Normal input">
+                <input type="text" class="highlight-mask" placeholder="Masked input (has highlight-mask class)">
+                <input type="password" id="passwordInput" placeholder="Password input">
+            </div>
+            
+            <div>
+                <input type="email" id="emailInput" placeholder="Email (will be obfuscated in default mode)">
+                <input type="tel" id="phoneInput" placeholder="Phone number">
+            </div>
+
+            <div>
+                <button onclick="testClick()">Test Click Event</button>
+                <button onclick="addCustomProperty()">Add Session Property</button>
+                <button onclick="getSessionInfo()">Get Session Info</button>
+            </div>
+
+            <div>
+                <button onclick="drawOnCanvas()">Draw on Canvas</button>
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h3>Session Information</h3>
+            <div id="sessionInfo">Click "Get Session Info" to retrieve session details</div>
+        </div>
+
+        <div class="test-section">
+            <h3>Canvas Test</h3>
+            <canvas id="testCanvas" width="300" height="150"></canvas>
+        </div>
+
+        <div class="test-section highlight-block">
+            <h3>Blocked Section</h3>
+            <p>This entire section has the highlight-block class and should be replaced with a placeholder in the replay.</p>
+        </div>
+    </div>
+
+    TEST TESTTESTTESTTESTTESTTEST
+
+
+
+    <script src="https://unpkg.com/launchdarkly-js-client-sdk@3"></script>
+    <script src="bundle.js"></script>
+</body>
+</html>
